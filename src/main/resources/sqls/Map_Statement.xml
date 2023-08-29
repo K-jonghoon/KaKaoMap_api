@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.min.edu.model.mapper.MapDaoImpl">
+
+	<select id="vet_detail" parameterType="java.lang.String" resultType="Vet_Vo">
+		SELECT 번호 , 개방서비스명 , 영업상태명 , 소재지전화 , 소재지전체주소 , 도로명전체주소 , 도로명우편번호 , 사업장명
+			FROM 동물병원
+			WHERE 영업상태구분코드 = '1'
+				AND 소재지전체주소 LIKE '%' || #{address} || '%'
+	</select>
+
+	<select id="listByRegion" resultType="Vet_Vo">
+		SELECT 소재지전체주소, 사업장명
+			FROM 동물병원
+			WHERE 영업상태구분코드 = '1'
+				AND 소재지전체주소 LIKE '%' || #{region} || '%'
+	</select>
+
+</mapper>
